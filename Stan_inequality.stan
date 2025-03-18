@@ -17,6 +17,7 @@ parameters {
   real<lower=0> sigma;
 }
 
+// partial derivatives
 transformed parameters{
   vector<lower=0>[N] dydx1;
   vector<lower=0>[N] dydx2;

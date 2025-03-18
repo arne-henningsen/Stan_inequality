@@ -1,4 +1,4 @@
-# load packages
+# load required package(s)
 library( "rstan" )
 
 # number of observations (before removing unsuitable observations)
