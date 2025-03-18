@@ -64,7 +64,8 @@ print( fit_stan, pars = grep( "^[^d]", fit_stan@model_pars, value = TRUE ) )
 plot( fit_stan, plotfun = "rhat" )
 plot( fit_stan, pars = grep( "^[^d]", fit_stan@model_pars, value = TRUE ),
   plotfun = "trace", inc_warmup = TRUE )
-pairs( fit_stan, pars = grep( "^[^d]", fit_stan@model_pars, value = TRUE ) )
+suppressWarnings(
+  pairs( fit_stan, pars = grep( "^[^d]", fit_stan@model_pars, value = TRUE ) ) )
   
 # investigate first derivatives (across all observations)
 samples_stan <- as.data.frame( fit_stan )
