@@ -85,10 +85,14 @@ all.equal( dat$dydx1estMean, with( dat, summary_stan[ "b1", "mean" ] +
     summary_stan[ "b11", "mean" ] * x1 + summary_stan[ "b12", "mean" ] * x2 ) )
 all.equal( dat$dydx2estMean, with( dat, summary_stan[ "b2", "mean" ] +
     summary_stan[ "b12", "mean" ] * x1 + summary_stan[ "b22", "mean" ] * x2 ) )
+summary( dat$dydx1estMean )
+summary( dat$dydx2estMean )
 compPlot( dat$dydx1, dat$dydx1estMean )
 compPlot( dat$dydx2, dat$dydx2estMean )
 # median estimates
 dat$dydx1estMedian <- summary_stan[ grep( "^dydx1", rownames( summary_stan ) ), "50%" ]
 dat$dydx2estMedian <- summary_stan[ grep( "^dydx2", rownames( summary_stan ) ), "50%" ]
+summary( dat$dydx1estMedian )
+summary( dat$dydx2estMedian )
 compPlot( dat$dydx1, dat$dydx1estMedian )
 compPlot( dat$dydx2, dat$dydx2estMedian )
