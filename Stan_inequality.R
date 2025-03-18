@@ -51,11 +51,11 @@ set.seed( 12345 )
 init_stan <- list()
 for( chain in 1:4 ){
   init_stan[[ chain ]] <- list(
-    b1 = runif( 1, min = 0.2, max = 2 ),
-    b2 = runif( 1, min = 0.2, max = 2 ),
+    b1 = runif( 1, min = 0.2, max = 1 ),
+    b2 = runif( 1, min = 0.2, max = 1 ),
     b11 = runif( 1, min = -0.02, max = 0.02 ),
     b12 = runif( 1, min = -0.02, max = 0.02 ),
-    b22 = runif( 1, min = 0.02, max = 0.02 )
+    b22 = runif( 1, min = -0.02, max = 0.02 )
   )
 }
 
