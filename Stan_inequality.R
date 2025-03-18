@@ -27,6 +27,8 @@ dat$dydx2 <- with( dat, b2 + b12 * x1 + b22 * x2 )
 par( mfrow = c( 2, 1 ) )
 hist( dat$dydx1, 20 )
 hist( dat$dydx2, 20 )
+par( mfrow = c( 1, 1 ) )
+hist( dat$dydx1 + dat$dydx2, 20 )
 # remove observations with negative partial derivatives
 dat <- subset( dat, dydx1 >= 0 & dydx2 >= 0 )
 
