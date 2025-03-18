@@ -46,7 +46,7 @@ model {
   vector[N] mu;
   for( i in 1:N ) {
     mu[i] = b0 + b1 * x1[i] + b2 * x2[i] + 0.5 * b11 * x1[i]^2 
-      + b12 * x1[i] * x2[i] + b22 * x2[i]^2;
+      + b12 * x1[i] * x2[i] + 0.5 * b22 * x2[i]^2;
   }
   y ~ normal( mu, sigma );
 }
