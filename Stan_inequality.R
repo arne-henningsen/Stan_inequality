@@ -37,9 +37,7 @@ dat_stan <- list(
   N = nrow( dat ),
   y = dat$y,
   x1 = dat$x1,
-  x2 = dat$x2,
-  lt = 0, # lower threshold
-  rs = 0.01 # regularisation sigma
+  x2 = dat$x2
 )
 
 # set number of cores

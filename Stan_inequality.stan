@@ -4,18 +4,16 @@ data {
   vector[N] y;
   vector[N] x1;
   vector[N] x2;
-  real lt; // lower threshold
-  real rs; // regularisation sigma
 }
 
 // define parameters
 parameters {
   real b0;
-  real b1;
-  real b2;
   real b11;
   real b12;
   real b22;
+  real<lower=-min( b11 * x1 + b12 * x2 )> b1;
+  real<lower=-min( b12 * x1 + b22 * x2 )> b2;
   real<lower=0> sigma;
 }
 
@@ -39,21 +37,6 @@ model {
   b12 ~ normal( 0, 1 );
   b22 ~ normal( 0, 1 );
   sigma ~ normal( 0, 10 );
-  // soft constraints on the partial derivatives
-  for( i in 1:N ) {
-    if( dydx1[i] < lt ) {
-        target += normal_lpdf( dydx1[i] - lt | 0, rs );
-    } else {
-        // Adding a constant to ensure smoothness around `lower_threshold`
-        target += normal_lpdf( 0 | 0, rs );     
-    }
-    if( dydx2[i] < lt ) {
-        target += normal_lpdf( dydx2[i] - lt | 0, rs );
-    } else {
-        // Adding a constant to ensure smoothness around `lower_threshold`
-        target += normal_lpdf( 0 | 0, rs );     
-    }
-  }  
 
   // fitted values
   vector[N] mu;
