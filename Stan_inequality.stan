@@ -37,6 +37,10 @@ model {
   b12 ~ normal( 0, 1 );
   b22 ~ normal( 0, 1 );
   sigma ~ normal( 0, 10 );
+  // dydx1 ~ lognormal( log(0.8), 1 );
+  // dydx2 ~ lognormal( log(0.8), 1 );
+  dydx1 ~ gamma( 1.2, 0.5 );
+  dydx2 ~ gamma( 1.2, 0.5 );
   
   // fitted values
   vector[N] mu;
