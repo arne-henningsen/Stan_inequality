@@ -81,6 +81,10 @@ summary_stan <- summary( fit_stan )$summary
 # mean estimates
 dat$dydx1estMean <- summary_stan[ grep( "^dydx1", rownames( summary_stan ) ), "mean" ]
 dat$dydx2estMean <- summary_stan[ grep( "^dydx2", rownames( summary_stan ) ), "mean" ]
+all.equal( dat$dydx1estMean, with( dat, summary_stan[ "b1", "mean" ] +
+    summary_stan[ "b11", "mean" ] * x1 + summary_stan[ "b12", "mean" ] * x2 ) )
+all.equal( dat$dydx2estMean, with( dat, summary_stan[ "b2", "mean" ] +
+    summary_stan[ "b12", "mean" ] * x1 + summary_stan[ "b22", "mean" ] * x2 ) )
 compPlot( dat$dydx1, dat$dydx1estMean )
 compPlot( dat$dydx2, dat$dydx2estMean )
 # median estimates
