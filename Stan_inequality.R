@@ -1,4 +1,5 @@
 # load required package(s)
+library( "miscTools" )
 library( "rstan" )
 
 # number of observations (before removing unsuitable observations)
@@ -72,3 +73,16 @@ samples_stan <- as.data.frame( fit_stan )
 par( mfrow = c( 2, 1 ) )
 hist( unlist( samples_stan[ , grep( "^dydx1", names( samples_stan ) ) ] ), 30 )
 hist( unlist( samples_stan[ , grep( "^dydx2", names( samples_stan ) ) ] ), 30 )
+
+# compare estimated partial derivatives with 'true' partial derivatives
+summary_stan <- summary( fit_stan )$summary
+# mean estimates
+dat$dydx1estMean <- summary_stan[ grep( "^dydx1", rownames( summary_stan ) ), "mean" ]
+dat$dydx2estMean <- summary_stan[ grep( "^dydx2", rownames( summary_stan ) ), "mean" ]
+compPlot( dat$dydx1, dat$dydx1estMean )
+compPlot( dat$dydx2, dat$dydx2estMean )
+# median estimates
+dat$dydx1estMedian <- summary_stan[ grep( "^dydx1", rownames( summary_stan ) ), "50%" ]
+dat$dydx2estMedian <- summary_stan[ grep( "^dydx2", rownames( summary_stan ) ), "50%" ]
+compPlot( dat$dydx1, dat$dydx1estMedian )
+compPlot( dat$dydx2, dat$dydx2estMedian )
